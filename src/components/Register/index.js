@@ -12,6 +12,9 @@ function Register() {
   const [lastName, setLastName] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const [location, setLocation] = useState("")
+  const [description, setDescription] = useState("")
+  const [occupation, setOccupation] = useState("")
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -50,62 +53,100 @@ function Register() {
 
   return (
     <Container>
-      <h3>Register</h3>
+      <h1 className="text-center w-50 mb-4">Register</h1>
       {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
       {successMessage && <Alert variant="success">{successMessage}</Alert>}
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId="loginName">
-          <Form.Label>Login Name</Form.Label>
           <Form.Control
+            className="w-50 p-2 "
             type="text"
-            placeholder="Enter login name"
+            placeholder="Username"
             value={loginName}
             onChange={(e) => setLoginName(e.target.value)}
             required
           />
         </Form.Group>
-        <Form.Group controlId="password">
-          <Form.Label>Password</Form.Label>
+        <div className="d-flex flex-nowrap w-50 justify-content-between mt-3" >
+          <Form.Group controlId="password" >
+            <Form.Control
+              className="p-2"
+              style={{ width: '270px' }}
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </Form.Group>
+          <Form.Group controlId="confirmPassword" >
+            <Form.Control
+              className="p-2"
+              style={{ width: '270px' }}
+              type="password"
+              placeholder="Confirm password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              required
+            />
+          </Form.Group>
+        </div>
+        <div className="d-flex flex-nowrap w-50 justify-content-between mt-3" >
+          <Form.Group controlId="firstName">
+            <Form.Control
+              className="p-2"
+              style={{ width: '270px' }}
+              type="text"
+              placeholder="First name"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+              required
+            />
+          </Form.Group>
+          <Form.Group controlId="lastName">
+            <Form.Control
+              className="p-2"
+              style={{ width: '270px' }}
+              type="text"
+              placeholder="Last name"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+            />
+          </Form.Group>
+        </div>
+        
+        <Form.Group controlId="location">
           <Form.Control
-            type="password"
-            placeholder="Enter password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </Form.Group>
-        <Form.Group controlId="confirmPassword">
-          <Form.Label>Confirm Password</Form.Label>
-          <Form.Control
-            type="password"
-            placeholder="Confirm password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            required
-          />
-        </Form.Group>
-        <Form.Group controlId="firstName">
-          <Form.Label>First Name</Form.Label>
-          <Form.Control
+            className="w-50 p-2 my-3"
             type="text"
-            placeholder="Enter first name"
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
-            required
+            placeholder="Location"
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
           />
         </Form.Group>
-        <Form.Group controlId="lastName">
-          <Form.Label>Last Name</Form.Label>
+        <Form.Group controlId="occupation">
           <Form.Control
+            className="w-50 p-2 mb-3"
             type="text"
-            placeholder="Enter last name"
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
+            placeholder="Occupation"
+            value={occupation}
+            onChange={(e) => setOccupation(e.target.value)}
           />
         </Form.Group>
-        <Button variant="primary" type="submit">
-          Register
-        </Button>
+        <Form.Group controlId="description">
+          <Form.Control
+            className="w-50 p-2 "
+            type="text"
+            placeholder="Description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
+        </Form.Group>
+        <div className="mt-3 text-center w-50">
+          <Button variant="primary" type="submit">
+            Register
+          </Button>
+        </div>
       </Form>
     </Container>
   );

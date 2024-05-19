@@ -1,5 +1,6 @@
 // App.js
 import './App.css';
+import { ToastContainer } from 'react-toastify';
 
 import React, { useState } from "react";
 import { Grid, Typography, Paper } from "@mui/material";
@@ -28,6 +29,7 @@ const updateUsers = async () => {
   setUsers(updatedUsers);
 }
   return (
+    <>
     <Router>
       <div>
         <Grid container spacing={2}>
@@ -37,7 +39,7 @@ const updateUsers = async () => {
           <div className="main-topbar-buffer" />
           <Grid item sm={3}>
             <Paper className="main-grid-item">
-              {auth.loggedIn ? <UserList users={users} updateUsers={updateUsers}  /> : <Typography>Please log in to see the user list.</Typography>}
+              {auth.loggedIn ? <UserList users={users} updateUsers={updateUsers} /> : <Typography>Please log in to see the user list.</Typography>}
             </Paper>
           </Grid>
           <Grid item sm={9}>
@@ -45,10 +47,10 @@ const updateUsers = async () => {
               <Routes>
                 {auth.loggedIn ? (
                   <>
-                   <Route path="/profile/:userId" element={<Profile auth={auth} setAuth={setAuth} updateUsers={updateUsers} />} />
+                    <Route path="/profile/:userId" element={<Profile auth={auth} setAuth={setAuth} updateUsers={updateUsers} />} />
                     <Route path="/users/:userId" element={<UserDetail />} />
                     <Route path="/photos/:userId" element={<UserPhotos />} />
-                    <Route path="/upload-photo" element={<UploadPhoto />} />  
+                    <Route path="/upload-photo" element={<UploadPhoto />} />
                     <Route path="/users" element={<UserList />} />
                   </>
                 ) : (
@@ -65,6 +67,18 @@ const updateUsers = async () => {
         </Grid>
       </div>
     </Router>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
+    </>
   );
 };
 

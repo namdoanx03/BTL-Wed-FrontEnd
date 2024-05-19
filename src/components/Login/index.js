@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Form, Button, Container } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { path } from '../../path';
+import { toast } from 'react-toastify';
 
 function Login({ setAuth }) {
   const [loginName, setLoginName] = useState('');
@@ -23,10 +24,10 @@ function Login({ setAuth }) {
       localStorage.setItem('user', JSON.stringify(data.user)); 
       setAuth({ loggedIn: true, user: data.user });
       // add name to alert
-      alert(`Login successful ${data.user.first_name}!`)
+      toast.success(`Login successful!`)
       navigate('/');
     } else {
-      alert(data.error);
+      toast.error(`Login successful!`)
     }
   };
 
@@ -36,22 +37,24 @@ function Login({ setAuth }) {
 
   return (
     <Container>
-      <h3>Login</h3>
+      
+      <h1 className='text-center w-50 mb-4'>Login</h1>
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId="loginName">
-          <Form.Label>Login Name</Form.Label>
-          <Form.Control type="text" placeholder="Enter login name" value={loginName} onChange={e => setLoginName(e.target.value)} />
+          {/* <Form.Label>Login Name</Form.Label> */}
+          <Form.Control className="w-50 p-2" type="text" placeholder="Email or username" value={loginName} onChange={e => setLoginName(e.target.value)} />
         </Form.Group>
         <Form.Group controlId="password">
-          <Form.Label>Password</Form.Label>
-          <Form.Control type="password" placeholder="Enter password" value={password} onChange={e => setPassword(e.target.value)} />
+          {/* <Form.Label>Password</Form.Label> */}
+          <Form.Control type="password" className="w-50 p-2 my-3" placeholder="Enter password" value={password} onChange={e => setPassword(e.target.value)} />
         </Form.Group>
-        <Button variant="primary" type="submit">Login</Button>
+        <Button variant="primary" className='mt-3 w-50' type="submit">Sign In</Button>
       </Form>
-      <div className="mt-3">
-        <Button variant="secondary" onClick={handleRegisterRedirect}>
-          Register
-        </Button>
+      <div className="mt-3 text-center w-50">
+          Not a member? 
+          <span className='text-danger ' onClick={handleRegisterRedirect}>
+            Register
+          </span>
       </div>
     </Container>
   );

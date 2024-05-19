@@ -63,7 +63,7 @@ const TopBar = ({ auth, setAuth }) => {
     <AppBar className="topbar-appBar" position="absolute">
       <Toolbar>
         <Typography variant="h5" color="inherit" style={{ flexGrow: 1 }}>
-          Doan Phuong Nam - B21DCCN542 - {context}
+           YOU ARE NOT LOGGED IN {context}
         </Typography>
         {user && (
           <>
