@@ -4,7 +4,6 @@ import { Form, Button, Container } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { path } from '../../path';
 import { toast } from 'react-toastify';
-import { loginUser } from '../../service/userService';
 
 
 function Login({ setAuth }) {
@@ -20,7 +19,6 @@ function Login({ setAuth }) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ login_name: loginName, password }),
       });
-      console.log('check respon:', response)
 
       const data = await response.json();
 
@@ -31,6 +29,7 @@ function Login({ setAuth }) {
 
         toast.success(`Login successful, welcome ${data.user.first_name}!`);
         navigate('/');
+        
       } else {
         toast.error(data.message || 'Login failed. Please try again.');
       }

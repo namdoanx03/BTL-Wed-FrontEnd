@@ -21,7 +21,8 @@ const UserList = ({ updateUsers }) => {
     return <ListItem>Loading...</ListItem>;
   }
   return (
-    <List component="nav" className="list">
+    <List component="nav" className="list-group">
+      <div className="userList">User List</div>
       {users.map((user) => (
         <ListItem to={`/users/${user._id}`} component={Link} key={user._id} divider className="list-item" > 
           <ListItemText primary={user.first_name + " " + user.last_name} />

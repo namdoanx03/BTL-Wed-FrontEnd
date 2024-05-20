@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { path } from "../../path";
+import { toast } from 'react-toastify';
+
 import "./styles.css";
 function UploadPhoto() {
   const [file, setFile] = useState(null);
@@ -16,7 +18,7 @@ function UploadPhoto() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (!file) {
-      alert("Please select a file first!");
+      toast.warning("Please select a file first!");
       return;
     }
 
@@ -35,10 +37,10 @@ function UploadPhoto() {
     });
 
     if (response.ok) {
-      alert("File uploaded successfully");
+      toast.success("File uploaded successfully");
       navigate(`/photos/${user._id}`)
     } else {
-      alert("Failed to upload file");
+      toast.error("Failed to upload file");
     }
   };
 

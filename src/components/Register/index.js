@@ -50,6 +50,9 @@ function Register() {
       setSuccessMessage("");
     }
   };
+  const handleLoginRedirect = () => {
+    navigate("/login");
+  }
 
   return (
     <Container>
@@ -143,9 +146,16 @@ function Register() {
           />
         </Form.Group>
         <div className="mt-3 text-center w-50">
-          <Button variant="primary" type="submit">
+          <Button variant="primary" type="submit" className="w-25" >
             Register
           </Button>
+        </div>
+        
+        <div className="mt-3 text-center w-50">
+          Already've an account. 
+          <span className='text-danger ' onClick={()=>handleLoginRedirect()}>
+             Login
+          </span>
         </div>
       </Form>
     </Container>

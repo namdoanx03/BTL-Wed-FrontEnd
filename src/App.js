@@ -38,16 +38,18 @@ const updateUsers = async () => {
             <TopBar auth={auth} setAuth={setAuth} />
           </Grid>
           <div className="main-topbar-buffer" />
-          <Grid item sm={3}>
-            <Paper className="main-grid-item">
+            <Grid item sm={3} style={{ height: "calc(100vh - 70px)"}}>
+              <Paper className="main-grid-item" style={{ minHeight: "calc(100vh - 70px)" }}>
               {auth.loggedIn ? <UserList users={users} updateUsers={updateUsers} /> : <Typography>Please log in to see the user list.</Typography>}
             </Paper>
           </Grid>
           <Grid item sm={9}>
-            <Paper className="main-grid-item">
+              <Paper className="main-grid-item" style={{ minHeight: "calc(100vh - 70px)" }}>
               <Routes>
                 {auth.loggedIn ? (
+                  
                   <>
+                  
                     <Route path="/profile/:userId" element={<Profile auth={auth} setAuth={setAuth} updateUsers={updateUsers} />} />
                     <Route path="/users/:userId" element={<UserDetail />} />
                     <Route path="/photos/:userId" element={<UserPhotos />} />
@@ -68,6 +70,7 @@ const updateUsers = async () => {
         </Grid>
       </div>
     </Router>
+
       <ToastContainer
         position="top-right"
         autoClose={3000}

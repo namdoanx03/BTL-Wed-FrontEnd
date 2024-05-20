@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Container, Form, Button, Alert } from 'react-bootstrap';
 import { path } from '../../path';
+import { useNavigate } from 'react-router-dom';
 
 function Profile({ auth, setAuth, users, updateUsers }) {
   const [userDetails, setUserDetails] = useState({
@@ -14,11 +15,18 @@ function Profile({ auth, setAuth, users, updateUsers }) {
   });
   const [message, setMessage] = useState({ type: '', text: '' });
   const { pathname } = useLocation();
+  const navigate = useNavigate(); 
+  const [id, setId] = useState(null);
 
-  const id  = pathname.split("/").pop();
+
+  useEffect(() => {
+    const id = pathname.split("/").pop();
+    setId(id);
+  }, [pathname]);
 
   useEffect(() => {
     const fetchUserData = async () => {
+      if (!id) return; // Tránh gọi API khi id chưa được xác định
       const response = await fetch(`${path}api/user/${id}`, {
         headers: {
           'Content-Type': 'application/json',
@@ -32,10 +40,8 @@ function Profile({ auth, setAuth, users, updateUsers }) {
         setMessage({ type: 'danger', text: 'Error fetching user details' });
       }
     };
-    
-    if (id) {
-      fetchUserData();
-    }
+
+    fetchUserData();
   }, [id]);
   console.log(userDetails);
   const handleChange = (e) => {
@@ -63,10 +69,14 @@ function Profile({ auth, setAuth, users, updateUsers }) {
       setMessage({ type: 'danger', text: 'Error updating profile' });
     }
   };
+  const myPhoto = () => {
+    navigate(`/photos/${id}`);  
+  }
+
 
   return (
     <Container>
-      <h3>Update Profile</h3>
+      <h3>Profile</h3>
       {message.text && <Alert variant={message.type}>{message.text}</Alert>}
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId="login_name">
@@ -93,7 +103,8 @@ function Profile({ auth, setAuth, users, updateUsers }) {
           <Form.Label>Occupation</Form.Label>
           <Form.Control type="text" name="occupation" value={userDetails.occupation} onChange={handleChange} placeholder="Occupation" />
         </Form.Group>
-        <Button variant="primary" type="submit">Update Profile</Button>
+        <Button variant="primary" type="submit" className='mt-3 text-center' >Update Profile</Button>
+        <Button variant="primary" className='mx-5 mt-3 text-center' onClick={()=> myPhoto()}>SEE PHOTO</Button>
       </Form>
     </Container>
   );

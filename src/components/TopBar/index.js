@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate, Link } from "react-router-dom";
 import { AppBar, Toolbar, Typography, Button } from "@mui/material";
 import { path } from "../../path";
+import './styles.css'
 
 const TopBar = ({ auth, setAuth }) => {
   const { pathname } = useLocation();
@@ -29,7 +30,7 @@ const TopBar = ({ auth, setAuth }) => {
         if (response.ok) {
           if(userId){
 
-            const data = await response.json();
+            // const data = await response.json();
             
             // if (pathname.includes("/photos")) {
             //   setContext(`Photos of ${data.first_name} ${data.last_name}`);
@@ -58,18 +59,25 @@ const TopBar = ({ auth, setAuth }) => {
     setAuth({ loggedIn: false, user: null }); 
     navigate("/login"); 
   };
+  const backHome = () => {
+    navigate('/register');
+  }
+  
 
   return (
-    <AppBar className="topbar-appBar" position="absolute">
+    <AppBar className="headerPage topbar-appBar position-fixed" position="absolute">
       <Toolbar>
         {!token && 
         <Typography variant="h5" color="inherit" style={{ flexGrow: 1 }}>
            YOU ARE NOT LOGGED IN {context}
         </Typography>
         }
+        <div className="backHome text-center" onClick={() => backHome()} >
+          Home
+        </div>
         {token &&
-          <Typography variant="h5" color="inherit" style={{ flexGrow: 1 }}>
-            Doan Phuong Nam {context}
+          <Typography variant="h5" color="inherit" style={{ flexGrow: 1 }} onClick = {() => backHome()} className="HomeName">
+            Home {context}
           </Typography>
         }
         {user && (
@@ -80,7 +88,7 @@ const TopBar = ({ auth, setAuth }) => {
             <Button color="inherit" component={Link} to={`/profile/${user._id}`}>
               Profile
             </Button>
-            <Button color="inherit" onClick={handleLogout}>
+            <Button style={{ color: 'red' }} onClick={handleLogout}>
               Logout
             </Button>
           </>

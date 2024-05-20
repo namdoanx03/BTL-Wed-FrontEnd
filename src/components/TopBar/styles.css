@@ -2,3 +2,11 @@
   height: 60;
   justify-content: "center";
 }
+.backHome{
+    font-size: 0px;
+    /* border: 1px solid red; */
+    width: 210px;
+    height: 40px;
+    position: absolute;
+    cursor: pointer;
+}
