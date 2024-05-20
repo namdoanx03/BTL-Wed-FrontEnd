@@ -31,11 +31,11 @@ const TopBar = ({ auth, setAuth }) => {
 
             const data = await response.json();
             
-            if (pathname.includes("/photos")) {
-              setContext(`Photos of ${data.first_name} ${data.last_name}`);
-            } else {
-              setContext(`Details of ${data.first_name} ${data.last_name}`);
-            }
+            // if (pathname.includes("/photos")) {
+            //   setContext(`Photos of ${data.first_name} ${data.last_name}`);
+            // } else {
+            //   setContext(`Details of ${data.first_name} ${data.last_name}`);
+            // }
           }
         } else {
           setContext('');
@@ -62,9 +62,16 @@ const TopBar = ({ auth, setAuth }) => {
   return (
     <AppBar className="topbar-appBar" position="absolute">
       <Toolbar>
+        {!token && 
         <Typography variant="h5" color="inherit" style={{ flexGrow: 1 }}>
            YOU ARE NOT LOGGED IN {context}
         </Typography>
+        }
+        {token &&
+          <Typography variant="h5" color="inherit" style={{ flexGrow: 1 }}>
+            Doan Phuong Nam {context}
+          </Typography>
+        }
         {user && (
           <>
           <Button color="inherit" component={Link} to={`/upload-photo`}>

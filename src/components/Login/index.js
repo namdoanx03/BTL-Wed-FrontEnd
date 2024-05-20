@@ -4,6 +4,8 @@ import { Form, Button, Container } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { path } from '../../path';
 import { toast } from 'react-toastify';
+import { loginUser } from '../../service/userService';
+
 
 function Login({ setAuth }) {
   const [loginName, setLoginName] = useState('');
@@ -12,22 +14,29 @@ function Login({ setAuth }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch(`${path}admin/login`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ login_name: loginName, password }),
-    });
+    try {
+      const response = await fetch(`${path}admin/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ login_name: loginName, password }),
+      });
+      console.log('check respon:', response)
 
-    const data = await response.json();
-    if (response.ok) {
-      localStorage.setItem('token', data.token);
-      localStorage.setItem('user', JSON.stringify(data.user)); 
-      setAuth({ loggedIn: true, user: data.user });
-      // add name to alert
-      toast.success(`Login successful!`)
-      navigate('/');
-    } else {
-      toast.error(`Login successful!`)
+      const data = await response.json();
+
+      if (response.ok) {
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('user', JSON.stringify(data.user));
+        setAuth({ loggedIn: true, user: data.user });
+
+        toast.success(`Login successful, welcome ${data.user.first_name}!`);
+        navigate('/');
+      } else {
+        toast.error(data.message || 'Login failed. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error during login:', error);
+      toast.error('An unexpected error occurred. Please try again.');
     }
   };
 
