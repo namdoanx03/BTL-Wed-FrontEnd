@@ -60,7 +60,7 @@ const TopBar = ({ auth, setAuth }) => {
     navigate("/login"); 
   };
   const backHome = () => {
-    navigate('/register');
+    navigate('/');
   }
   
 

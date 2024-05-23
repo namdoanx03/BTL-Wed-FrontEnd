@@ -32,6 +32,9 @@ function Register() {
         password : password,
         first_name: firstName,
         last_name: lastName,
+        location: location,
+        description:description,
+        occupation:occupation
       }),
     });
 
@@ -45,6 +48,9 @@ function Register() {
       setConfirmPassword("");
       setFirstName("");
       setLastName("");
+      setLocation("")
+      setDescription("")
+      setOccupation("")
     } else {
       setErrorMessage(data.error);
       setSuccessMessage("");
@@ -153,7 +159,7 @@ function Register() {
         
         <div className="mt-3 text-center w-50">
           Already've an account. 
-          <span className='text-danger ' onClick={()=>handleLoginRedirect()}>
+          <span className='text-danger' onClick={()=>handleLoginRedirect()}>
              Login
           </span>
         </div>

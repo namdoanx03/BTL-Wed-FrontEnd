@@ -182,18 +182,9 @@ const UserPhotos = () => {
       <Grid container spacing={3} justifyContent="center">
         {photos.length === 0 ? (
           <>
-            <Grid item xs={12}>
-              <Typography
-                variant="h6"
-                style={{ textAlign: "center", margin: "20px" }}
-              >
-                <div class="d-flex justify-content-center">
-                  <div class="spinner-border" role="status">
-                    <span class="visually-hidden">Loading...</span>
-                  </div>
-                </div>
-              </Typography>
-            </Grid>
+            <Typography variant="h6" style={{ textAlign: "center", margin: "20px" }}>
+              User doesn't have any photo
+            </Typography>
           </>
         ) : (
           <>
